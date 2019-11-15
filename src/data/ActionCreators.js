@@ -1,4 +1,4 @@
-import { ActionTypes } from './types'
+import { ActionTypes, DataTypes } from './types'
 import { RestDataSource } from './RestDataSource'
 
 const dataSource = new RestDataSource()
@@ -21,4 +21,11 @@ export const setPageSize = newSize => ({
 
 export const setSortProperty = newProp => ({
     type: ActionTypes.DATA_SET_SORT_PROPERTY, payload: newProp
+})
+
+export const placeOrder = order => ({
+    type: ActionTypes.DATA_STORE,
+    payload: dataSource.StoreData(DataTypes.ORDERS, order).then(response => ({
+        dataType: DataTypes.ORDERS, data: response.data
+    }))
 })
